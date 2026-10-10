@@ -33,7 +33,9 @@ export default function Navbar({ categories }: { categories: Category[] }) {
           router.push("/");
           router.refresh();
         },
-        onError: () => toast.error("সাইন আউট করা যায়নি"),
+           onError: () => {
+     toast.error("সাইন আউট করা যায়নি");
+   },
       },
     });
   }
