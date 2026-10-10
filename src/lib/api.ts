@@ -1,9 +1,12 @@
 import { fromBn } from "./bn";
 import type { Category, Market, Product } from "./types";
+import productsSnapshot from "@/data/products.json";
+import categoriesSnapshot from "@/data/categories.json";
 
+// Official API first; the older mirrors are used only if it is unreachable.
 const BASES = [
-  process.env.NEXT_PUBLIC_API_BASE_1 ??
-    "https://api.api-store.workers.dev/api/bazardor",
+  "https://openapi.programming-hero.com/api/bazardor",
+  "https://api.api-store.workers.dev/api/bazardor",
   "https://api.abcz.workers.dev/api/bazardor",
 ];
 
@@ -156,8 +159,15 @@ function normalizeCategory(raw: any): Category {
 
 export async function getProducts(category?: string): Promise<Product[]> {
   const q = category ? `?category=${encodeURIComponent(category)}` : "";
-  const json = await request(`/products${q}`);
-  return toArray(json, ["products", "items"]).map(normalizeProduct);
+  try {
+    const json = await request(`/products${q}`);
+    const list = toArray(json, ["products", "items"]);
+    if (list.length > 0) return list.map(normalizeProduct);
+  } catch {
+    // API down or rate limited -> use the saved snapshot below
+  }
+  const all = toArray(productsSnapshot, ["products", "items"]).map(normalizeProduct);
+  return category ? all.filter((p) => p.category === category) : all;
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {
@@ -171,8 +181,14 @@ export async function getProduct(slug: string): Promise<Product | null> {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const json = await request("/categories");
-  return toArray(json, ["categories", "items"]).map(normalizeCategory);
+  try {
+    const json = await request("/categories");
+    const list = toArray(json, ["categories", "items"]);
+    if (list.length > 0) return list.map(normalizeCategory);
+  } catch {
+    // fall back to the saved snapshot
+  }
+  return toArray(categoriesSnapshot, ["categories", "items"]).map(normalizeCategory);
 }
 
 export async function getCategory(slug: string): Promise<Category | null> {
