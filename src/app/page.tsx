@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ProductGrid from "@/components/ProductGrid";
 import { getProducts } from "@/lib/api";
 import { toBn } from "@/lib/bn";
@@ -44,16 +45,16 @@ export default async function Home() {
             সব পণ্য দেখুন
           </a>
         </div>
-        {/* Swap this block with <Image src="/hero.png" .../> if you have the Figma asset */}
-        <div className="flex items-center justify-center" aria-hidden>
-          <div className="grid h-44 w-44 place-items-center rounded-full bg-base-200 text-7xl sm:h-56 sm:w-56 sm:text-8xl">
-            🧺
-          </div>
-          <div className="-ml-10 flex flex-col gap-2 text-4xl sm:text-5xl">
-            <span>🍎</span>
-            <span>🥕</span>
-            <span>🍅</span>
-          </div>
+        <div className="flex items-center justify-center">
+          <Image
+            src="/hero.svg"
+            alt="ফলের ঝুড়ি"
+            width={500}
+            height={460}
+            priority
+            unoptimized
+            className="h-auto w-full max-w-sm md:max-w-md"
+          />
         </div>
       </section>
 
