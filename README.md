@@ -6,7 +6,7 @@
 
 নিত্যপ্রয়োজনীয় পণ্যের দৈনিক বাজারদর, দামের ওঠানামা এবং বাজারভিত্তিক তুলনা — সব এক জায়গায়।
 
-[🌐 Live Demo](https://your-app.vercel.app) · [💻 GitHub Repo](https://github.com/prerana0023/bazardor)
+[🌐 Live Demo](https://bazardor-orpin-delta.vercel.app) · [💻 GitHub Repo](https://github.com/prerana0023/bazardor)
 
 </div>
 
@@ -25,7 +25,7 @@
 | 1 | 📈 **Live price ticker** | Infinite scrolling strip with emoji, name, price per unit and ▲/▼ change % |
 | 2 | 🔺🔻 **Risers & fallers** | Top 6 products whose prices went up and down today |
 | 3 | 🗂️ **Category pages with sorting** | Sort by default / price low→high / high→low. Bengali numerals are converted to real numbers before sorting |
-| 4 | 🔐 **Authentication** | Email/password, Google and GitHub login with BetterAuth and toast notifications |
+| 4 | 🔐 **Authentication** | Email/password and GitHub login with BetterAuth, plus toast notifications |
 | 5 | 🛡️ **Protected product details** | Min / max / average price and a market-wise price table, visible only after login |
 | 6 | 👤 **Profile & update info** | View profile and update your name |
 | 7 | 📱 **Fully responsive** | Works on mobile, tablet and desktop, with skeleton loaders and a custom 404 page |
@@ -69,12 +69,9 @@ Open [http://localhost:3000](http://localhost:3000).
 | `MONGODB_URI` | MongoDB Atlas connection string (include database name) |
 | `BETTER_AUTH_SECRET` | Random secret, e.g. `openssl rand -base64 32` |
 | `BETTER_AUTH_URL` | `http://localhost:3000` locally, your live URL in production |
-| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google OAuth credentials |
 | `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` | GitHub OAuth credentials |
 
-OAuth callback URLs:
-- Google: `{BETTER_AUTH_URL}/api/auth/callback/google`
-- GitHub: `{BETTER_AUTH_URL}/api/auth/callback/github`
+GitHub OAuth callback URL: `{BETTER_AUTH_URL}/api/auth/callback/github`
 
 ## 📁 Project Structure
 
